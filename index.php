@@ -18,15 +18,12 @@ function generateDeck(): array {
     $face_cards = ["Jack", "Queen", "King"];
     $deck = [];
     foreach($suits as $suit) {
-        for($i = 2; $i < 11; $i++) {
-            //$deck["$suit"."_"."$i"] = $i;
+        for($i = 2; $i <= 10; $i++) {
             $deck[] = ["suit" => "$suit", "card" => "$i", "value" => $i];
         }
         foreach($face_cards as $face_card) {
-            //$deck["$suit"."_"."$face_card"] = 10;
             $deck[] = ["suit" => "$suit", "card" => "$face_card", "value" => 10];
         }
-        //$deck["$suit"."_"."Ace"] = 11;
         $deck[] = ["suit" => "$suit", "card" => "Ace", "value" => 11];
     }
     return $deck;
@@ -113,7 +110,10 @@ $player1SecondCardSuit = $playedGamedData[0][1][1]["suit"].".png";
 $player1SecondCard = $playedGamedData[0][1][1]["card"];
 
 $player2FirstCardSuit = $playedGamedData[0][2][0]["suit"].".png";
+$player2FirstCard = $playedGamedData[0][2][0]["card"];
 $player2SecondCardSuit = $playedGamedData[0][2][1]["suit"].".png";
+$player2SecondCard = $playedGamedData[0][2][1]["card"];
+$winningPlayer = $playedGamedData[1];
 ?>
 
 
@@ -122,7 +122,7 @@ $player2SecondCardSuit = $playedGamedData[0][2][1]["suit"].".png";
 <html lang="en-GB">
 
 <head>
-    <title>Encryption Service</title>
+    <title>BlackJack</title>
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -140,21 +140,65 @@ $player2SecondCardSuit = $playedGamedData[0][2][1]["suit"].".png";
 </header>
 
 <main>
-    <section>
-        <h2>Player 1 drew...</h2>
-        <?php echo "<p>The $player1FirstCard of </p>" ?>
-        <?php echo "<img src='$player1FirstCardSuit' alt='Player 1s first card'>" ?>
-        <?php echo "<p>The $player1SecondCard of </p>" ?>
-        <?php echo "<img src='$player1SecondCardSuit' alt='Player 1s first card'>" ?>
-        <h2>Player 2 drew...</h2>
-        <?php echo "<img src='$player2FirstCardSuit' alt='Player 1s first card'>" ?>
-        <?php echo "<img src='$player2SecondCardSuit' alt='Player 1s first card'>" ?>
+    <section class="cards-drawn-section" id="cards-drawn-section">
+        <form method="post" action="#cards-drawn-section">
+            <input type="submit" name="reset" value="Deal again" class="form-submit-button">
+        </form>
+        <h2>Player 1's cards...</h2>
+        <div class="cards-parent">
+            <div class="cards-child">
+                <?php
+                echo "<h3>$player1FirstCard</h3>";
+                echo "<img src='$player1FirstCardSuit' alt='Player 1s first card'>"
+                ?>
+            </div>
+            <div class="cards-child">
+                <?php
+                echo "<h3>$player1SecondCard</h3>";
+                echo "<img src='$player1SecondCardSuit' alt='Player 1s first card'>"
+                ?>
+            </div>
+        </div>
+        <h2>Player 2's cards...</h2>
+        <div class="cards-parent">
+            <div class="cards-child">
+                <?php
+                echo "<h3>$player2FirstCard</h3>";
+                echo "<img src='$player2FirstCardSuit' alt='Player 1s first card'>"
+                ?>
+            </div>
+            <div class="cards-child">
+                <?php
+                echo "<h3>$player2SecondCard</h3>";
+                echo "<img src='$player2SecondCardSuit' alt='Player 1s first card'>"
+                ?>
+            </div>
+        </div>
     </section>
-    <section>
-        <h2>The result</h2>
-        <p>Player $winner wins.</p>
+    <section class="results-section">
+        <?php
+        if($winningPlayer == -1) {
+            echo "<h2>It's a draw!</h2>";
+        } else {
+            echo "<h2>Player $winningPlayer wins!</h2>";
+        }?>
     </section>
 </main>
+<footer>
+    <div>
+        <div class="footer-item">
+            <a href="https://www.instagram.com/thehopefulhitchhikers/?hl=en" target="_blank">Instagram</a>
+        </div>
 
+        <div class="footer-item">
+            <a href="https://www.linkedin.com/in/maxwellnewton/" target="_blank">LinkedIn</a>
+        </div>
+
+        <div class="footer-item">
+            <a href="https://github.com/maxwell-01" target="_blank">GitHub</a>
+        </div>
+    </div>
+
+</footer>
 </body>
 </html>

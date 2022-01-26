@@ -28,7 +28,6 @@ function generateDeck(): array {
         }
         //$deck["$suit"."_"."Ace"] = 11;
         $deck[] = ["suit" => "$suit", "card" => "Ace", "value" => 11];
-        print_r($deck);
     }
     return $deck;
 }
@@ -97,50 +96,65 @@ function play() {
 }
 
 
-play();
+$playedGamedData = play();
 
 
-$gameData = [
-        [["suit" => "hearts", "card" => "jack", "value" => 10],[],"score" => 0],
-        []
-]
 
+
+$exampleGameData = [[
+            [["suit" => "hearts", "card" => "jack", "value" => 10],["another card"],"score" => 0],
+            ["another players data"]
+            ],
+        ["outcome data"]];
+
+$player1FirstCardSuit = $playedGamedData[0][1][0]["suit"].".png";
+$player1FirstCard = $playedGamedData[0][1][0]["card"];
+$player1SecondCardSuit = $playedGamedData[0][1][1]["suit"].".png";
+$player1SecondCard = $playedGamedData[0][1][1]["card"];
+
+$player2FirstCardSuit = $playedGamedData[0][2][0]["suit"].".png";
+$player2SecondCardSuit = $playedGamedData[0][2][1]["suit"].".png";
 ?>
 
 
 
-<!--<!DOCTYPE html>-->
-<!--<html lang="en-GB">-->
-<!---->
-<!--<head>-->
-<!--    <title>Encryption Service</title>-->
-<!--    <link rel="stylesheet" href="normalize.css">-->
-<!--    <link rel="stylesheet" href="style.css">-->
-<!--    <link rel="preconnect" href="https://fonts.googleapis.com">-->
-<!--    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->
-<!--    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">-->
-<!--    <link rel="shortcut icon" type="image/jpg" href="favicon.ico"/>-->
-<!--</head>-->
-<!---->
-<!--<body>-->
-<!---->
-<!--<header>-->
-<!---->
-<!--    <h1>BlackJack/h1>-->
-<!---->
-<!--</header>-->
-<!---->
-<!--<main>-->
-<!--    <section>-->
-<!--        <h2>What the players drew...</h2>-->
-<!--        <p>Player one drew: $player_one_cards</p>-->
-<!--        <p>Player two drew: $player_two_cards</p>-->
-<!--    </section>-->
-<!--    <section>-->
-<!--        <h2>The result</h2>-->
-<!--        <p>Player $winner wins.</p>-->
-<!--    </section>-->
-<!--</main>-->
-<!---->
-<!--</body>-->
-<!--</html>-->
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+    <title>Encryption Service</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/jpg" href="favicon.ico"/>
+</head>
+
+<body>
+
+<header>
+
+    <h1>BlackJack</h1>
+
+</header>
+
+<main>
+    <section>
+        <h2>Player 1 drew...</h2>
+        <?php echo "<p>The $player1FirstCard of </p>" ?>
+        <?php echo "<img src='$player1FirstCardSuit' alt='Player 1s first card'>" ?>
+        <?php echo "<p>The $player1SecondCard of </p>" ?>
+        <?php echo "<img src='$player1SecondCardSuit' alt='Player 1s first card'>" ?>
+        <h2>Player 2 drew...</h2>
+        <?php echo "<img src='$player2FirstCardSuit' alt='Player 1s first card'>" ?>
+        <?php echo "<img src='$player2SecondCardSuit' alt='Player 1s first card'>" ?>
+    </section>
+    <section>
+        <h2>The result</h2>
+        <p>Player $winner wins.</p>
+    </section>
+</main>
+
+</body>
+</html>
